@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEC Events Registeration</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #ffffff;
+            color: #333;
+        }
+
+        /* Navigation Bar Styling */
+        nav {
+            background-color: #2c3e50;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        nav a {
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-left: 20px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #3498db;
+        }
+
+        /* Header Styling */
+        .header {
+            text-align: center;
+            padding: 120px 20px;
+            background-color: #ffffff;
+            color: white;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #000000;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            color: #000000;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            padding-bottom: 30px;
+        }
+
+        .btn {
+            padding: 16px 40px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(52, 152, 219, 0.3);
+        }
+
+        .btn:active {
+            background-color: #1f6fa4;
+            transform: translateY(1px);
+        }
+
+        /* Footer Styling */
+        .footer {
+            background-color: #2c3e50;
+            text-align: center;
+            padding: 20px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            color: #ecf0f1;
+        }
+
+        .footer p {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .footer a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .header p {
+                font-size: 1.2rem;
+            }
+
+            .button-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">
+            <h2>BEC Events Registration</h2>
+        </div>
+        <div class="nav-links">
+            <a href="{% url 'home' %}">Home</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'event_list' %}">Events</a>
+                {% if user.is_staff or user.is_superuser %}
+                    <a href="{% url 'addevent' %}">Add Event</a>
+                    <a href="{% url 'download_data' %}">Download Data</a>
+                {% endif %}
+                <a href="{% url 'user_logout' %}">Logout</a>
+            {% else %}
+                <a href="{% url 'user_login' %}">Login</a>
+                <a href="{% url 'user_register' %}">Signup</a>
+                <a href="{% url 'event_list' %}">Events</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <div class="header">
+        <h1>Welcome to BEC Events Portal! </h1>
+        
+        <div class="button-container">
+            <a href="{% url 'event_list' %}" class="btn">See new Events</a>
+        </div>
+
+        
+    </div>
+
+    <!-- Footer Section -->
+    <div class="footer">
+        <p>© 2024 BEC Platform. All rights reserved to Gunakar Polaki. <br> <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </div>
+
+</body>
+</html>
