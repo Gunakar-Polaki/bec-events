@@ -168,6 +168,7 @@ def addevent(request):
     if request.method == "POST":
         # Collect form data
         name = request.POST.get('name')
+        description = request.POST.get('description')
         date = request.POST.get('date')
         time = request.POST.get('time')
         venue = request.POST.get('venue')
@@ -178,6 +179,7 @@ def addevent(request):
         # Save the event
         Event.objects.create(
             name=name,
+            description=description,
             date=date,
             time=time,
             venue=venue,
